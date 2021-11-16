@@ -1,5 +1,7 @@
 package com.crewspace.auth.utils;
 
+import com.crewspace.auth.constants.CustomExceptionCode;
+import com.crewspace.auth.exception.CustomException;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import java.io.BufferedReader;
@@ -28,7 +30,8 @@ public class KakaoLogin {
 
         int status = conn.getResponseCode();
         if(status != 200){
-            throw new RuntimeException("잘못된 access token - 에러 핸들링!");
+            log.warn("카카오 소셜 로그인 - 유효하지 않은 Access token입니다.");
+            throw new CustomException(CustomExceptionCode.UNAUTHORIZED_SOCIAL_ACCESS_TOKEN);
         }
 
         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -49,8 +52,8 @@ public class KakaoLogin {
         if(hasEmail){
             return element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("email").getAsString();
         }else{
-            log.warn("카카오 소셜 로그인 - 이메일 제공 동의 X");
-            throw new RuntimeException("이메일 제공 동의 해주세요!");
+            log.warn("카카오 소셜 로그인 - 이메일이 제공되지 않았습니다.");
+            throw new CustomException(CustomExceptionCode.EMAIL_NOT_FOUND);
         }
 
     }
