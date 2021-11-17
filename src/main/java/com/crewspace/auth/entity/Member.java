@@ -21,10 +21,8 @@ public class Member extends BaseTimeEntity {
     @Column(name = "member_id")
     private Long id;
 
-    @Column(unique = true, nullable = false)
     private String oauthId;
 
-    @Column(unique = true)
     private String email;
 
     @Enumerated(EnumType.STRING)
