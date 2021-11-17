@@ -1,4 +1,4 @@
-package com.crewspace.auth.service;
+package com.crewspace.auth.oauth2;
 
 import com.crewspace.auth.entity.Member;
 import com.crewspace.auth.entity.OAuthAttributes;
@@ -37,7 +37,6 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
 
         UserProfile userProfile = OAuthAttributes.extract(registrationId, attributes);
 
-        log.info(userProfile.getEmail() + "나왔다.");
         Member member = saveOrUpdate(userProfile);
 
         return new DefaultOAuth2User(
@@ -50,8 +49,8 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
     private Member saveOrUpdate(UserProfile userProfile){
         Member member = memberRepository.findByOauthId(userProfile.getOauthId())
             .map(m -> m.update(userProfile.getEmail()))
-            .orElse(userProfile.toMember());
+            .orElse(memberRepository.save(userProfile.toMember()));
 
-        return memberRepository.save(member);
+        return member;
     }
 }
