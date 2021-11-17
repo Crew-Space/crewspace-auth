@@ -7,12 +7,16 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import java.security.Key;
 import java.util.Date;
+import java.util.Map;
 import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class TokenProvider {
 
@@ -41,8 +45,16 @@ public class TokenProvider {
 
         // AT 생성 -> 유저 역할, 이름
         Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
+
+        // Refacotr 요소
+        OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
+        Map<String, Object> attributes = oAuth2User.getAttributes();
+        Map<String, Object> kakaoAccount =  (Map<String, Object>) attributes.get("kakao_account");
+        String userEmail = String.valueOf(kakaoAccount.get("email"));
+
+        log.info("토큰 생성 - userEmail : "+userEmail);
         String accessToken = Jwts.builder()
-            .setSubject(authentication.getName())       // payload "sub": "name"
+            .setSubject(userEmail)       // payload "sub": "name"
             .claim(AUTHORITIES_KEY, authorities)        // payload "auth": "ROLE_USER"
             .setExpiration(accessTokenExpiresIn)        // payload "exp": 1516239022 (예시)
             .signWith(key, SignatureAlgorithm.HS512)    // header "alg": "HS512"
