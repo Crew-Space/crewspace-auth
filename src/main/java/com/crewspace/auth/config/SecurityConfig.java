@@ -1,5 +1,6 @@
 package com.crewspace.auth.config;
 
+import com.crewspace.auth.service.OAuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -12,6 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 @RequiredArgsConstructor
 public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
+    private final OAuthService oAuthService;
     @Override
     public void configure(WebSecurity web) {
         web.ignoring()
@@ -20,19 +22,22 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        http
+            .oauth2Login()
+            .userInfoEndpoint()
+            .userService(oAuthService);
         http
             .cors().and()
             .csrf().disable()
-
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
             .and()
             .authorizeRequests()
-            .antMatchers("/auth/**").permitAll()
-
+            .antMatchers("/auth/**", "/login/**").permitAll()
             .and()
-            .formLogin().disable()
-        ;
+            .formLogin().disable();
+
+
     }
 }
