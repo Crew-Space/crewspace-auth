@@ -24,20 +24,26 @@ public class Member extends BaseTimeEntity {
     private String oauthId;
 
     private String email;
+    private String image;
+    private String nickname;
 
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
     @Builder
-    public Member(Long id, String oAuthId, String email, Authority authority) {
-        this.id = id;
-        this.oauthId = oAuthId;
+    public Member(String oauthId, String email, String image, String nickname,
+        Authority authority) {
+        this.oauthId = oauthId;
         this.email = email;
+        this.image = image;
+        this.nickname = nickname;
         this.authority = authority;
     }
 
-    public Member update(String email){
+    public Member update(String email, String image, String nickname){
         this.email = email;
+        this.image = image;
+        this.nickname = nickname;
         return this;
     }
 }
