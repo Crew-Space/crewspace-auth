@@ -1,7 +1,7 @@
 ![배너](https://user-images.githubusercontent.com/49540564/141690776-75bca6ec-d802-4aed-98f0-ec30ca441042.png)
 
 
-## <img src="https://user-images.githubusercontent.com/63635886/143657533-509704cd-7761-49cd-9ee6-20e53dbe03f0.png" width="75px"/>  Server
+## <img src="https://user-images.githubusercontent.com/63635886/143657533-509704cd-7761-49cd-9ee6-20e53dbe03f0.png" width="75px"/>  Auth Server
 > **동아리 공지·정보공유 플랫폼**
 > 
 > 해커리어 해커톤 출품작 ( 2021.11.10 ~ )
