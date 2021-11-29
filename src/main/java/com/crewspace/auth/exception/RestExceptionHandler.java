@@ -39,7 +39,8 @@ public class RestExceptionHandler{
     // Rest Exception Handler
     @ExceptionHandler(value = { Exception.class })
     protected ResponseEntity<BaseResponse> handleException(Exception e, HttpServletRequest request) {
-        log.error("[500 Error] : " + request.getMethod() + " " + request.getRequestURI());
+        log.error("[500 Error] : " + request.getMethod() + " " + request.getRequestURI() + " " + e.getMessage());
+        log.error(e.toString());
         return BaseResponse.toBasicErrorResponse(INTERNAL_SERVER_ERROR, request.getRequestURI()+ " 서버 내에서 요청 처리 중 에러가 발생했습니다.");
     }
 }

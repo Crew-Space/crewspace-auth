@@ -5,3 +5,7 @@ spring:
   web:
     resources:
       add-mappings: false
+  profiles:
+    group:
+      "local": "test, common"
+      "prod": "prod, common"
