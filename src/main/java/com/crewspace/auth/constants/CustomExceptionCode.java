@@ -13,6 +13,7 @@ public enum CustomExceptionCode {
     /* 401 - 유효하지 않음 */
     UNAUTHORIZED_SOCIAL_ACCESS_TOKEN(UNAUTHORIZED, "[소셜 로그인] 유효하지 않은 Access token입니다."),
     UNAUTHORIZED_USER(UNAUTHORIZED, "로그아웃된 유저입니다"),
+    UNAUTHORIZED_USER_REFRESH_TOKEN(UNAUTHORIZED, "유저의 리프레시 토큰이 아닙니다!"),
     // token 관련
     WRONG_TYPE_TOKEN(UNAUTHORIZED, "잘못된 JWT 서명을 가진 토큰입니다."),
     EXPIRED_TOKEN(UNAUTHORIZED, "만료된 JWT 토큰입니다."),
