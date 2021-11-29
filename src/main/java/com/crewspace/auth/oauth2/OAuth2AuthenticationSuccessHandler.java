@@ -3,8 +3,8 @@ package com.crewspace.auth.oauth2;
 import static com.crewspace.auth.constants.SuccessCode.*;
 
 import com.crewspace.auth.constants.SuccessCode;
-import com.crewspace.auth.dto.LoginSuccessResponse;
-import com.crewspace.auth.dto.TokenDTO;
+import com.crewspace.auth.dto.res.LoginSuccessResponse;
+import com.crewspace.auth.dto.payload.TokenDTO;
 import com.crewspace.auth.jwt.TokenProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -16,8 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,6 @@
 package com.crewspace.auth.jwt;
 
-import com.crewspace.auth.dto.TokenDTO;
+import com.crewspace.auth.dto.payload.TokenDTO;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
