@@ -25,11 +25,11 @@ import org.springframework.stereotype.Component;
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private final TokenProvider tokenProvider;
-
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
         Authentication authentication) throws IOException, ServletException {
         TokenDTO token = tokenProvider.generateTokenDTO(authentication);
+
         setResponse(response, LOGIN_SUCCESS, token);
         return;
     }
