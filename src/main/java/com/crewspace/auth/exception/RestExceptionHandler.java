@@ -5,7 +5,9 @@ import static org.springframework.http.HttpStatus.*;
 import com.crewspace.auth.dto.BaseResponse;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -17,6 +19,14 @@ public class RestExceptionHandler{
     @ExceptionHandler(value = { CustomException.class })
     protected ResponseEntity<BaseResponse> handleCustomException(CustomException e) {
         return BaseResponse.toCustomErrorResponse(e.getExceptionCode());
+    }
+
+    // @RequestBody valid 에러
+    @ExceptionHandler(value = { MethodArgumentNotValidException.class })
+    protected ResponseEntity<BaseResponse> handleMethodArgNotValidException(MethodArgumentNotValidException e, HttpServletRequest request) {
+        log.warn(String.format("[400 Error] : %s %s", request.getMethod(), request.getRequestURI()));
+        return BaseResponse.toBasicErrorResponse(
+            HttpStatus.BAD_REQUEST, e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
     }
 
     // 404 Error Handler
