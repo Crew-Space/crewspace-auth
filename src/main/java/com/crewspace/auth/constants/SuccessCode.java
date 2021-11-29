@@ -9,6 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum SuccessCode {
     LOGIN_SUCCESS(OK, "소셜 로그인 성공"),
+    REISSUE_SUCCESS(OK, "토큰 재발급 성공"),
     TEST_SUCCESS(OK, "성공~");
 
     private final HttpStatus status;

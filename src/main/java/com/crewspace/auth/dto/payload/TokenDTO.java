@@ -1,4 +1,4 @@
-package com.crewspace.auth.dto;
+package com.crewspace.auth.dto.payload;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
