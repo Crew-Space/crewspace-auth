@@ -1,6 +1,7 @@
 package com.crewspace.auth.utils;
 
 import java.time.Duration;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -14,12 +15,12 @@ public class RedisUtil {
 
     private final RedisTemplate<String, String> redisTemplate;
 
-    public String getData(String key){
+    public Optional<String> getData(String key){
         ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
-        return valueOperations.get(key);
+        return Optional.ofNullable(valueOperations.get(key));
     }
 
-    public void setDate(String key, String value){
+    public void setData(String key, String value){
         ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
         valueOperations.set(key, value);
     }
