@@ -7,6 +7,7 @@ then
   echo "> 현재 구동중인 Docker 컨테이너가 없으므로 종료하지 않습니다." >> /home/ubuntu/auth/deploy.log
 else
   echo "> sudo docker stop $CURRENT_PID"
+  sudo docker stop $CURRENT_PID
   sudo docker rm $CURRENT_PID
   sleep 5
 fi
