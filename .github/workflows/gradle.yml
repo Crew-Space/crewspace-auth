@@ -23,7 +23,7 @@ jobs:
       run: gpg --quiet --batch --yes --always-trust --decrypt --passphrase=${{ secrets.ENV_SECRET }} --output ./src/main/resources/env.tar ./src/main/resources/env.tar.gpg
 
     - name: Unzip env
-      run: tar xvf ./src/main/resources/env.tar
+      run: tar xvf ./src/main/resources/env.tar -C ./src/main/resources
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
