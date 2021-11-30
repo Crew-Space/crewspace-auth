@@ -11,7 +11,7 @@ else
   sleep 5
 fi
 
-cd /home/ubuntu/resource
+cd /home/ubuntu/auth
 
 sudo docker rmi $(sudo docker images | grep 'auth') # 기존에 있던 이미지 삭제
 sudo docker build -t auth ./ # 이미지 생성
