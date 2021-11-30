@@ -1,7 +1,7 @@
 name: crewspace auth CI
 
 env:
-  S3_BUCKET_NAME: crewspace-server
+  S3_BUCKET_NAME: crewspace
   PROJECT_NAME: crewspace
   
 on:
@@ -66,4 +66,4 @@ jobs:
       run: aws s3 cp --region ap-northeast-2 --acl private ./crewspace-auth-jar.zip s3://crewspace/deploy/crewspace-auth.zip
 
     - name: Code Deploy
-      run: aws deploy create-deployment --application-name crewspace-auth --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name crew-auth --s3-location bucket=crewspace-server,bundleType=zip,key=deploy/crewspace-auth.zip
+      run: aws deploy create-deployment --application-name crewspace-auth --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name crew-auth --s3-location bucket=crewspace,bundleType=zip,key=deploy/crewspace-auth.zip
