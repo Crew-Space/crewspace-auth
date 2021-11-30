@@ -1,5 +1,7 @@
 # env
 /src/main/resources/env.yml
+# env.tar file
+/src/main/resources/env.tar
 
 .DS_Store
 HELP.md
