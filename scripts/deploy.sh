@@ -1,5 +1,6 @@
-echo "> 현재 실행 중인 Docker 컨테이너 pid 확인" >> /home/ubuntu/auth/deploy.log
 CURRENT_PID=$(sudo docker container ls -q)
+
+echo "> 현재 실행 중인 Docker 컨테이너 pid 확인 $CURRENT_PID" >> /home/ubuntu/auth/deploy.log
 
 if [ -z $CURRENT_PID ]
 then
@@ -11,7 +12,7 @@ else
   sleep 5
 fi
 
-cd /home/ubuntu/resource
+cd /home/ubuntu/auth
 
 sudo docker rmi $(sudo docker images | grep 'auth') # 기존에 있던 이미지 삭제
 sudo docker build -t auth ./ # 이미지 생성

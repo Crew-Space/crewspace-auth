@@ -45,6 +45,9 @@ dependencies {
 
 	// validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// mySQL
+	runtimeOnly 'mysql:mysql-connector-java'
 }
 
 test {
