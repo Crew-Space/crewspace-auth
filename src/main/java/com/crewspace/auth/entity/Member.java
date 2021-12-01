@@ -26,7 +26,7 @@ public class Member extends BaseTimeEntity {
     private String email;
     private String image;
     private String nickname;
-    private Boolean push;
+    private Boolean push = false; // default value
 
     @Enumerated(EnumType.STRING)
     private Authority authority;
