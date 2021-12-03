@@ -33,6 +33,7 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
     private final TokenProvider tokenProvider;
 
     @Override
+    @Transactional
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2UserService delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest); // social resousrce server 에서 가져온 유저 정보
@@ -54,7 +55,8 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
         );
     }
 
-    private Member saveOrUpdate(UserProfile userProfile){
+    @Transactional
+    public Member saveOrUpdate(UserProfile userProfile){
         Member member = memberRepository.findByOauthId(userProfile.getOauthId())
             .map(m -> m.update(userProfile.getEmail(), userProfile.getImage(), userProfile.getNickname()))
             .orElseGet(()->memberRepository.save(userProfile.toMember()));

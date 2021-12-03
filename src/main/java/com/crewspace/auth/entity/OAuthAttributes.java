@@ -8,14 +8,14 @@ public enum OAuthAttributes {
 
     KAKAO("kakao", (attributes) -> {
         Map<String, Object> kakaoAccount =  (Map<String, Object>) attributes.get("kakao_account");
-        Map<String, Object> properties =  (Map<String, Object>) attributes.get("properties");
+        Map<String, Object> profile =  (Map<String, Object>) kakaoAccount.get("profile");
 
         // map의 요소를 그대로 가져오면 안되고, String class의 valueOf 활용
         return new UserProfile(
             String.valueOf(attributes.get("id")),
             String.valueOf(kakaoAccount.get("email")),
-            String.valueOf(properties.get("thumbnail_image")),
-            String.valueOf(properties.get("nickname"))
+            String.valueOf(profile.get("thumbnail_image_url")),
+            String.valueOf(profile.get("nickname"))
         );
     });
 
