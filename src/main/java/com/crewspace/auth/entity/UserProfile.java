@@ -17,7 +17,7 @@ public class UserProfile {
     public UserProfile(String oauthId, String email, String image, String nickname) {
         this.oauthId = oauthId;
         this.email = email;
-        this.image = image;
+        this.image = image.replace("http", "https");
         this.nickname = nickname;
     }
 
